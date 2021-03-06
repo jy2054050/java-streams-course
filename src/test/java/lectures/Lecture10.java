@@ -2,6 +2,8 @@ package lectures;
 
 
 import com.google.common.collect.Lists;
+
+import java.net.CookieManager;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -24,12 +26,20 @@ public class Lecture10 {
   @Test
   public void withoutFlatMap() throws Exception {
 //    [Mariam, Alex, Ismail, John, Alesha, Andre, Susy, Ali]
-
+    List<String> result = new ArrayList<>();
+    for(List<String> s : arrayListOfNames ) {
+      result.addAll(s);
+    }
+    System.out.println(result);
   }
 
   @Test
   public void withFlatMap() throws Exception {
 //   [Mariam, Alex, Ismail, John, Alesha, Andre, Susy, Ali]
+    List<String> result =  arrayListOfNames.stream()
+            .flatMap(List::stream)
+            .collect(Collectors.toList());
+    System.out.println(result);
 
   }
 

@@ -18,20 +18,27 @@ public class Lecture5 {
   @Test
   public void understandingFilter() throws Exception {
     ImmutableList<Car> cars = MockData.getCars();
-
+    cars.stream().
+            filter(car -> car.getPrice() < 20000)
+            .collect(Collectors.toList()).forEach(System.out::println);
   }
 
   @Test
   public void ourFirstMapping() throws Exception {
     // transform from one data type to another
     List<Person> people = MockData.getPeople();
-
+    assertThat(people.stream()
+            .map(person -> new PersonDTO(person.getId(), person.getFirstName(), person.getAge()))
+            .collect(Collectors.toList()).size()).isEqualTo(people.size());
   }
 
   @Test
   public void averageCarPrice() throws Exception {
-    // calculate average of car prices
-
+    Double avgPrice = MockData.getCars().stream()
+          .mapToDouble(car -> car.getPrice())
+          .average()
+            .orElse(0);
+    System.out.println(avgPrice);
   }
 
   @Test

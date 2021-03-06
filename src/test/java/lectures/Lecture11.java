@@ -11,6 +11,11 @@ public class Lecture11 {
   @Test
   public void joiningStrings() throws Exception {
     List<String> names = ImmutableList.of("anna", "john", "marcos", "helena", "yasmin");
+    String result = names.stream()
+            .map(String::toUpperCase)
+            .collect(Collectors.joining(", "));
+
+    System.out.println(result);
 
   }
 
